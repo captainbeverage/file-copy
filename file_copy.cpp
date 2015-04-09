@@ -6,16 +6,21 @@
 using namespace std;
 
 int main() {
+	string readPath;
 	string readFilename;
 	string writeFilename;
-	string path;
+	string writePath;
 	unsigned char readString[512];
 	ssize_t	sizeOfRead = 0;
+
+	cout << "Enter the path for the source file to read: ";
+	cin >> readPath;
 
 	cout << "Enter source filename to read: ";
 	cin >> readFilename;
 
-	// Reading file
+	readFilename = readPath + readFilename;
+
 	int fID = open(readFilename.c_str(),O_RDONLY);
 
 	if (fID == -1) 
@@ -25,12 +30,15 @@ int main() {
 		sizeOfRead = read(fID,(void*)readString,512);
 	}
 
-	// Write to file
 	cout << "Enter the path for the destination file: ";
-	cin >> path;
+	cin >> writePath;
 
 	cout << "Enter destination filename to write: ";
 	cin >> writeFilename;
+
+	writeFilename = writePath + writeFilename;
+
+	cout << writeFilename;
 
 	// try to open file first to get file descripter
 	int fileDescripter = open(writeFilename.c_str(), O_WRONLY);
